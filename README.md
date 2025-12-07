@@ -253,7 +253,7 @@ Redis is optional. Set `redis.enabled: false` in config if not using.
 ## 📚 Resources
 
 - **IonAPI Repository**: [github.com/mattbaconz/IonAPI](https://github.com/mattbaconz/IonAPI)
-- **IonAPI Guide**: [IONAPI_AI_GUIDE.md](https://github.com/mattbaconz/IonAPI/blob/main/IONAPI_AI_GUIDE.md)
+- **IonAPI Documentation**: [View Docs](https://github.com/mattbaconz/IonAPI#readme)
 - **Template Repository**: [github.com/mattbaconz/ion-plugin-template](https://github.com/mattbaconz/ion-plugin-template)
 - **Discord Support**: [discord.com/invite/VQjTVKjs46](https://discord.com/invite/VQjTVKjs46)
 - **Report Issues**: [GitHub Issues](https://github.com/mattbaconz/ion-plugin-template/issues)
