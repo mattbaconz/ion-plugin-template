@@ -1,0 +1,29 @@
+name: IonTemplatePlugin
+version: '${version}'
+main: com.example.iontemplate.IonTemplatePlugin
+api-version: '1.20'
+author: YourName
+description: A template plugin showcasing IonAPI features
+softdepend:
+  - Vault
+
+commands:
+  spawn:
+    description: Teleport to spawn
+    usage: /<command>
+  balance:
+    description: Check your balance
+    usage: /<command> [player]
+    aliases: [bal, money]
+  pay:
+    description: Pay another player
+    usage: /<command> <player> <amount>
+  shop:
+    description: Open the shop GUI
+    usage: /<command>
+  stats:
+    description: View your stats
+    usage: /<command>
+  scoreboard:
+    description: Toggle scoreboard
+    usage: /<command>

@@ -1,0 +1,60 @@
+# IonTemplate Plugin Configuration
+
+# Database settings
+database:
+  type: sqlite  # sqlite or mysql
+  # MySQL settings (only used if type is mysql)
+  mysql:
+    host: localhost
+    port: 3306
+    database: minecraft
+    username: root
+    password: ""
+
+# Redis settings (optional)
+redis:
+  enabled: false
+  host: localhost
+  port: 6379
+  password: ""
+
+# Economy settings
+economy:
+  starting-balance: 1000.0
+  currency-symbol: "$"
+  currency-name: "Coins"
+
+# Spawn location
+spawn:
+  world: world
+  x: 0.5
+  y: 64.0
+  z: 0.5
+  yaw: 0.0
+  pitch: 0.0
+
+# Cooldowns (in seconds)
+cooldowns:
+  teleport: 30
+  pay: 5
+
+# Rate limits
+rate-limits:
+  chat:
+    max-messages: 5
+    window-seconds: 10
+
+# Shop items
+shop:
+  diamond-sword:
+    material: DIAMOND_SWORD
+    price: 500
+    name: "<gradient:red:blue>Legendary Sword"
+  golden-apple:
+    material: GOLDEN_APPLE
+    price: 100
+    name: "<gold>Golden Apple"
+  ender-pearl:
+    material: ENDER_PEARL
+    price: 50
+    name: "<dark_purple>Ender Pearl"
