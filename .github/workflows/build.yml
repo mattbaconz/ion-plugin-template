@@ -1,6 +1,7 @@
 name: Build and Test
 
 on:
+  workflow_dispatch:  # Manual trigger
   push:
     branches: [ main, develop ]
   pull_request:
@@ -27,16 +28,12 @@ jobs:
         repository: mattbaconz/IonAPI
         path: IonAPI
         ref: main
-      continue-on-error: false
         
     - name: Build and publish IonAPI to local Maven
       working-directory: IonAPI
       run: |
         chmod +x gradlew
-        echo "Building IonAPI..."
         ./gradlew clean publishToMavenLocal --no-daemon --stacktrace
-        echo "Verifying IonAPI installation..."
-        ls -la ~/.m2/repository/com/ionapi/ || echo "IonAPI not found in local Maven!"
       env:
         GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx2048m"
         

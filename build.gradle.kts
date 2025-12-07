@@ -17,6 +17,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     
     // IonAPI modules - only include what you need to reduce JAR size
+    // Using JitPack for CI/CD builds, mavenLocal() for local development
     implementation("com.ionapi:ion-api:1.2.0")          // Core utilities (24KB)
     implementation("com.ionapi:ion-core:1.2.0")         // Platform abstraction (8KB)
     implementation("com.ionapi:ion-database:1.2.0")     // Database ORM (53KB)
