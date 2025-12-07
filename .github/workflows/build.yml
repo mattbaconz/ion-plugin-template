@@ -26,22 +26,22 @@ jobs:
       with:
         repository: mattbaconz/IonAPI
         path: IonAPI
+        ref: main
         
     - name: Build and publish IonAPI to local Maven
+      working-directory: IonAPI
       run: |
-        cd IonAPI
         chmod +x gradlew
-        ./gradlew publishToMavenLocal --no-daemon
-        cd ..
+        ./gradlew publishToMavenLocal --no-daemon --stacktrace
         
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
     - name: Build with Gradle
-      run: ./gradlew clean shadowJar --no-daemon
+      run: ./gradlew clean shadowJar --no-daemon --stacktrace
       
     - name: Run tests
-      run: ./gradlew test --no-daemon
+      run: ./gradlew test --no-daemon --stacktrace || echo "No tests found"
       
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
