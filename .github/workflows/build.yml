@@ -27,12 +27,15 @@ jobs:
         repository: mattbaconz/IonAPI
         path: IonAPI
         ref: main
+      continue-on-error: false
         
     - name: Build and publish IonAPI to local Maven
       working-directory: IonAPI
       run: |
         chmod +x gradlew
         ./gradlew publishToMavenLocal --no-daemon --stacktrace
+      env:
+        GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx2048m"
         
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew

@@ -59,28 +59,43 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 ### Prerequisites
 - Java 21 or higher
 - Gradle 8.0+ (wrapper included)
+- IonAPI 1.2.0 (see build steps)
 
 ### Build Steps
 
-1. **Clone the repository**
+#### Option 1: Local Build (Recommended)
+
+1. **Clone both repositories**
 ```bash
+# Clone IonAPI
+git clone https://github.com/mattbaconz/IonAPI.git
+cd IonAPI
+./gradlew publishToMavenLocal
+cd ..
+
+# Clone template
 git clone https://github.com/mattbaconz/ion-plugin-template.git
 cd ion-plugin-template
 ```
 
-2. **Build IonAPI locally** (first time only)
-```bash
-cd ../IonAPI
-./gradlew publishToMavenLocal
-cd ../ion-plugin-template
-```
-
-3. **Build the plugin**
+2. **Build the plugin**
 ```bash
 ./gradlew shadowJar
 ```
 
 Output: `build/libs/IonTemplatePlugin-1.0.0.jar` (402KB)
+
+#### Option 2: GitHub Actions
+
+The repository includes a GitHub Actions workflow that automatically:
+1. Checks out IonAPI from the main repository
+2. Builds and publishes IonAPI to local Maven
+3. Builds the template plugin
+4. Uploads the JAR as an artifact
+
+Simply push to `main` or `develop` branch to trigger the build.
+
+> **Note**: IonAPI must be available in the [main repository](https://github.com/mattbaconz/IonAPI) for CI/CD builds to work.
 
 ### 🐳 Quick Start with Docker
 
