@@ -6,6 +6,7 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 [![Paper](https://img.shields.io/badge/Paper-1.20.4-blue.svg)](https://papermc.io/)
 [![IonAPI](https://img.shields.io/badge/IonAPI-1.2.0-green.svg)](https://github.com/mattbaconz/IonAPI)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Build](https://github.com/mattbaconz/ion-plugin-template/actions/workflows/build.yml/badge.svg)](https://github.com/mattbaconz/ion-plugin-template/actions/workflows/build.yml)
 
 ## ✨ Features Demonstrated
 
