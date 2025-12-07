@@ -33,9 +33,13 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 - **Hot-Reload Config** - Live configuration updates without restart
 - **Metrics Tracking** - Built-in performance monitoring
 
-### 🔗 Optional Features
+### 🔗 Additional Features
 - **Redis Pub/Sub** - Cross-server messaging (optional)
 - **Task Scheduler** - Unified async/sync task API
+- **Warp System** - Save and teleport to custom locations
+- **Leaderboards** - Top players by kills, deaths, and K/D ratio
+- **BossBar Manager** - Progress bars, health bars, and notifications
+- **Messages System** - Externalized messages with MiniMessage support
 
 ## 📋 Commands
 
@@ -47,6 +51,8 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 | `/shop` | Open shop GUI | `iontemplate.shop` |
 | `/stats` | View your statistics | `iontemplate.stats` |
 | `/scoreboard` | Toggle scoreboard display | `iontemplate.scoreboard` |
+| `/warp [list\|set\|delete] [name]` | Manage and teleport to warps | `iontemplate.warp` |
+| `/leaderboard [kills\|deaths\|kdr]` | View top players | `iontemplate.leaderboard` |
 
 ## 🛠️ Building
 
@@ -75,6 +81,24 @@ cd ../ion-plugin-template
 ```
 
 Output: `build/libs/IonTemplatePlugin-1.0.0.jar` (402KB)
+
+### 🐳 Quick Start with Docker
+
+Test the plugin with MySQL and Redis instantly:
+
+```bash
+# Start services
+docker-compose up -d
+
+# Build and deploy
+./gradlew shadowJar
+docker-compose restart paper
+
+# View logs
+docker-compose logs -f paper
+```
+
+See [DOCKER.md](DOCKER.md) for detailed Docker setup.
 
 ## ⚙️ Configuration
 
@@ -121,16 +145,19 @@ Changes apply instantly via hot-reload!
 ```
 src/main/java/com/example/iontemplate/
 ├── IonTemplatePlugin.java          # Main plugin class
-├── command/                        # Command handlers
+├── command/                        # Command handlers (8 commands)
 │   ├── BalanceCommand.java
 │   ├── PayCommand.java
 │   ├── ShopCommand.java
 │   ├── SpawnCommand.java
 │   ├── StatsCommand.java
-│   └── ScoreboardCommand.java
+│   ├── ScoreboardCommand.java
+│   ├── WarpCommand.java            # NEW: Warp management
+│   └── LeaderboardCommand.java     # NEW: Top players
 ├── data/                           # Database entities
 │   ├── PlayerData.java             # Player stats (@Cacheable)
-│   └── PlayerBalance.java          # Economy balances
+│   ├── PlayerBalance.java          # Economy balances
+│   └── Warp.java                   # NEW: Saved locations
 ├── economy/                        # Economy implementation
 │   └── TemplateEconomyProvider.java
 ├── gui/                            # GUI menus
@@ -138,7 +165,8 @@ src/main/java/com/example/iontemplate/
 ├── listener/                       # Event listeners
 │   └── PlayerListener.java
 └── manager/                        # Feature managers
-    └── ScoreboardManager.java
+    ├── ScoreboardManager.java
+    └── BossBarManager.java         # NEW: BossBar API
 ```
 
 ## 🎯 Code Examples

@@ -114,6 +114,7 @@ public class IonTemplatePlugin extends JavaPlugin {
         try {
             database.createTable(PlayerData.class);
             database.createTable(PlayerBalance.class);
+            database.createTable(com.example.iontemplate.data.Warp.class);
         } catch (Exception e) {
             getLogger().severe("Failed to create database tables: " + e.getMessage());
         }
@@ -168,6 +169,8 @@ public class IonTemplatePlugin extends JavaPlugin {
         getCommand("shop").setExecutor(new ShopCommand(shopGui));
         getCommand("stats").setExecutor(new StatsCommand(database));
         getCommand("scoreboard").setExecutor(new ScoreboardCommand(scoreboardManager));
+        getCommand("warp").setExecutor(new com.example.iontemplate.command.WarpCommand(database));
+        getCommand("leaderboard").setExecutor(new com.example.iontemplate.command.LeaderboardCommand(database));
     }
     
     private void loadSettings(FileConfiguration cfg) {

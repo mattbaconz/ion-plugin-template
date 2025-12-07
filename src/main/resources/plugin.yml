@@ -11,19 +11,58 @@ commands:
   spawn:
     description: Teleport to spawn
     usage: /<command>
+    permission: iontemplate.spawn
   balance:
     description: Check your balance
     usage: /<command> [player]
     aliases: [bal, money]
+    permission: iontemplate.balance
   pay:
     description: Pay another player
     usage: /<command> <player> <amount>
+    permission: iontemplate.pay
   shop:
     description: Open the shop GUI
     usage: /<command>
+    permission: iontemplate.shop
   stats:
     description: View your stats
     usage: /<command>
+    permission: iontemplate.stats
   scoreboard:
     description: Toggle scoreboard
     usage: /<command>
+    permission: iontemplate.scoreboard
+  warp:
+    description: Manage and teleport to warps
+    usage: /<command> [list|set|delete] [name]
+    permission: iontemplate.warp
+  leaderboard:
+    description: View leaderboards
+    usage: /<command> [kills|deaths|kdr]
+    aliases: [lb, top]
+    permission: iontemplate.leaderboard
+
+permissions:
+  iontemplate.*:
+    description: All IonTemplate permissions
+    children:
+      iontemplate.spawn: true
+      iontemplate.balance: true
+      iontemplate.pay: true
+      iontemplate.shop: true
+      iontemplate.stats: true
+      iontemplate.scoreboard: true
+      iontemplate.warp: true
+      iontemplate.warp.set: true
+      iontemplate.warp.delete: true
+      iontemplate.leaderboard: true
+  iontemplate.warp:
+    description: Use warps
+    default: true
+  iontemplate.warp.set:
+    description: Create warps
+    default: op
+  iontemplate.warp.delete:
+    description: Delete warps
+    default: op

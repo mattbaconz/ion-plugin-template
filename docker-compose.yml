@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # MySQL Database for testing
+  mysql:
+    image: mysql:8.0
+    container_name: iontemplate-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: minecraft
+      MYSQL_USER: iontemplate
+      MYSQL_PASSWORD: iontemplate
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for pub/sub testing
+  redis:
+    image: redis:7-alpine
+    container_name: iontemplate-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Paper MC Server for testing (optional)
+  paper:
+    image: itzg/minecraft-server:java21
+    container_name: iontemplate-paper
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "1.20.4"
+      MEMORY: "2G"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "minecraft"
+      RCON_PORT: 25575
+    ports:
+      - "25565:25565"
+      - "25575:25575"
+    volumes:
+      - paper_data:/data
+      - ./build/libs:/plugins:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
+  redis_data:
+  paper_data:
