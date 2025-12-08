@@ -8,6 +8,11 @@ softdepend:
   - Vault
 
 commands:
+  menu:
+    description: Open the main menu GUI
+    usage: /<command>
+    aliases: [gui, mainmenu]
+    permission: iontemplate.menu
   spawn:
     description: Teleport to spawn
     usage: /<command>
@@ -47,6 +52,7 @@ permissions:
   iontemplate.*:
     description: All IonTemplate permissions
     children:
+      iontemplate.menu: true
       iontemplate.spawn: true
       iontemplate.balance: true
       iontemplate.pay: true

@@ -158,7 +158,9 @@ public class IonTemplatePlugin extends JavaPlugin {
     
     private void registerCommands() {
         ShopGui shopGui = new ShopGui(getConfig().getConfigurationSection("shop"));
+        com.example.iontemplate.gui.MainMenuGui mainMenu = new com.example.iontemplate.gui.MainMenuGui(this);
         
+        getCommand("menu").setExecutor(new MenuCommand(mainMenu));
         getCommand("spawn").setExecutor(new SpawnCommand(
             teleportCooldowns, spawnLocation, getConfig().getInt("cooldowns.teleport", 30)
         ));
@@ -167,10 +169,10 @@ public class IonTemplatePlugin extends JavaPlugin {
             payCooldowns, getConfig().getInt("cooldowns.pay", 5)
         ));
         getCommand("shop").setExecutor(new ShopCommand(shopGui));
-        getCommand("stats").setExecutor(new StatsCommand(database));
+        getCommand("stats").setExecutor(new StatsCommand());
         getCommand("scoreboard").setExecutor(new ScoreboardCommand(scoreboardManager));
         getCommand("warp").setExecutor(new com.example.iontemplate.command.WarpCommand(database));
-        getCommand("leaderboard").setExecutor(new com.example.iontemplate.command.LeaderboardCommand(database));
+        getCommand("leaderboard").setExecutor(new com.example.iontemplate.command.LeaderboardCommand());
     }
     
     private void loadSettings(FileConfiguration cfg) {

@@ -25,21 +25,26 @@ public class ScoreboardManager {
     public void showScoreboard(Player player) {
         if (!enabled.getOrDefault(player.getUniqueId(), true)) return;
         
+        // Don't recreate if already exists
+        if (scoreboards.containsKey(player.getUniqueId())) {
+            return;
+        }
+        
         IonScoreboard board = IonScoreboard.builder()
-            .title("<gradient:gold:yellow><bold>Ion Template")
-            .line(15, "<white>{player}")
-            .line(14, "")
-            .line(13, "<gold>Balance:")
-            .line(12, "<yellow>  ${balance}")
-            .line(11, "")
-            .line(10, "<aqua>Stats:")
-            .line(9, "<white>  Kills: <green>{kills}")
-            .line(8, "<white>  Deaths: <red>{deaths}")
-            .line(7, "<white>  K/D: <yellow>{kdr}")
-            .line(6, "")
-            .line(5, "<gray>Online: <white>{online}")
+            .title("<gold><bold>Ion Template")
+            .line(0, "<white>{player}")
+            .line(1, "")
+            .line(2, "<gold>Balance:")
+            .line(3, "<yellow>  ${balance}")
             .line(4, "")
-            .line(3, "<gradient:blue:purple>play.server.com")
+            .line(5, "<aqua>Stats:")
+            .line(6, "<white>  Kills: <green>{kills}")
+            .line(7, "<white>  Deaths: <red>{deaths}")
+            .line(8, "<white>  K/D: <yellow>{kdr}")
+            .line(9, "")
+            .line(10, "<gray>Online: <white>{online}")
+            .line(11, "")
+            .line(12, "<blue>play.server.com")
             .placeholder("player", Player::getName)
             .placeholder("balance", p -> {
                 try {

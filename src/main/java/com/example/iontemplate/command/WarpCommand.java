@@ -10,8 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.stream.Collectors;
-
 public class WarpCommand implements CommandExecutor {
     
     private final IonDatabase database;
@@ -29,14 +27,21 @@ public class WarpCommand implements CommandExecutor {
         }
         
         if (args.length == 0) {
-            listWarps(player);
+            // Open warp GUI
+            new com.example.iontemplate.gui.WarpGui(
+                (com.example.iontemplate.IonTemplatePlugin) org.bukkit.Bukkit.getPluginManager().getPlugin("IonTemplatePlugin")
+            ).open(player);
             return true;
         }
         
         String subCommand = args[0].toLowerCase();
         
         switch (subCommand) {
-            case "list" -> listWarps(player);
+            case "list" -> {
+                new com.example.iontemplate.gui.WarpGui(
+                    (com.example.iontemplate.IonTemplatePlugin) org.bukkit.Bukkit.getPluginManager().getPlugin("IonTemplatePlugin")
+                ).open(player);
+            }
             case "set" -> {
                 if (args.length < 2) {
                     MessageBuilder.of("<red>Usage: /warp set <name>").send(player);
@@ -55,24 +60,6 @@ public class WarpCommand implements CommandExecutor {
         }
         
         return true;
-    }
-    
-    private void listWarps(Player player) {
-        try {
-            var warps = database.findAll(Warp.class);
-            if (warps.isEmpty()) {
-                MessageBuilder.of("<gray>No warps available yet!").send(player);
-                return;
-            }
-            
-            String warpList = warps.stream()
-                .map(Warp::getName)
-                .collect(Collectors.joining(", "));
-            
-            MessageBuilder.of("<gold>Available warps: <yellow>" + warpList).send(player);
-        } catch (Exception e) {
-            MessageBuilder.of("<red>Failed to load warps!").send(player);
-        }
     }
     
     private void setWarp(Player player, String name) {
