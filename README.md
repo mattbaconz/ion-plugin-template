@@ -23,10 +23,12 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 - **Async by Default** - All economy operations are non-blocking
 
 ### 🎨 User Interface
+- **Main Menu GUI** - Central hub for accessing all features
 - **GUI Framework** - Inventory-based menus with click handlers
+- **Interactive Commands** - All commands open beautiful GUIs
 - **Shop System** - Item purchasing with economy integration
-- **Live Scoreboard** - Auto-updating sidebar with placeholders
-- **MiniMessage** - Modern text formatting with gradients and colors
+- **Live Scoreboard** - Auto-updating sidebar with placeholders (no flashing!)
+- **MiniMessage** - Modern text formatting with colors and styles
 
 ### ⚡ Performance & Utilities
 - **Cooldown Manager** - Thread-safe player cooldown tracking
@@ -46,14 +48,20 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 
 | Command | Description | Permission |
 |---------|-------------|------------|
+| `/menu` | **Open main menu GUI** (hub for all features) | `iontemplate.menu` |
 | `/spawn` | Teleport to spawn (30s cooldown) | `iontemplate.spawn` |
-| `/balance [player]` | Check balance | `iontemplate.balance` |
+| `/balance` | Open balance GUI | `iontemplate.balance` |
 | `/pay <player> <amount>` | Transfer money (5s cooldown) | `iontemplate.pay` |
 | `/shop` | Open shop GUI | `iontemplate.shop` |
-| `/stats` | View your statistics | `iontemplate.stats` |
+| `/stats` | Open stats GUI | `iontemplate.stats` |
 | `/scoreboard` | Toggle scoreboard display | `iontemplate.scoreboard` |
-| `/warp [list\|set\|delete] [name]` | Manage and teleport to warps | `iontemplate.warp` |
-| `/leaderboard [kills\|deaths\|kdr]` | View top players | `iontemplate.leaderboard` |
+| `/warp [list\|set\|delete] [name]` | Open warp GUI or manage warps | `iontemplate.warp` |
+| `/leaderboard` | Open leaderboard GUI | `iontemplate.leaderboard` |
+
+**Aliases:**
+- `/menu` → `/gui`, `/mainmenu`
+- `/balance` → `/bal`, `/money`
+- `/leaderboard` → `/lb`, `/top`
 
 ## 🛠️ Building
 
@@ -84,7 +92,7 @@ cd ion-plugin-template
 ./gradlew shadowJar
 ```
 
-Output: `build/libs/IonTemplatePlugin-1.0.0.jar` (402KB)
+Output: `build/libs/IonTemplatePlugin-1.0.0.jar` (419KB)
 
 #### Option 2: GitHub Actions
 
@@ -161,28 +169,34 @@ Changes apply instantly via hot-reload!
 ```
 src/main/java/com/example/iontemplate/
 ├── IonTemplatePlugin.java          # Main plugin class
-├── command/                        # Command handlers (8 commands)
-│   ├── BalanceCommand.java
+├── command/                        # Command handlers (9 commands)
+│   ├── MenuCommand.java            # NEW: Main menu
+│   ├── BalanceCommand.java         # Opens balance GUI
 │   ├── PayCommand.java
 │   ├── ShopCommand.java
 │   ├── SpawnCommand.java
-│   ├── StatsCommand.java
+│   ├── StatsCommand.java           # Opens stats GUI
 │   ├── ScoreboardCommand.java
-│   ├── WarpCommand.java            # NEW: Warp management
-│   └── LeaderboardCommand.java     # NEW: Top players
+│   ├── WarpCommand.java            # Opens warp GUI
+│   └── LeaderboardCommand.java     # Opens leaderboard GUI
 ├── data/                           # Database entities
 │   ├── PlayerData.java             # Player stats (@Cacheable)
 │   ├── PlayerBalance.java          # Economy balances
-│   └── Warp.java                   # NEW: Saved locations
+│   └── Warp.java                   # Saved locations
 ├── economy/                        # Economy implementation
 │   └── TemplateEconomyProvider.java
-├── gui/                            # GUI menus
-│   └── ShopGui.java
+├── gui/                            # GUI menus (NEW: 6 GUIs!)
+│   ├── MainMenuGui.java            # Central hub
+│   ├── BalanceGui.java             # Balance viewer
+│   ├── StatsGui.java               # Stats viewer
+│   ├── LeaderboardGui.java         # Top players
+│   ├── WarpGui.java                # Warp teleporter
+│   └── ShopGui.java                # Shop system
 ├── listener/                       # Event listeners
 │   └── PlayerListener.java
 └── manager/                        # Feature managers
-    ├── ScoreboardManager.java
-    └── BossBarManager.java         # NEW: BossBar API
+    ├── ScoreboardManager.java      # Fixed flashing issue
+    └── BossBarManager.java         # BossBar API
 ```
 
 ## 🎯 Code Examples
@@ -229,7 +243,21 @@ IonEconomy.transaction(player.getUniqueId())
     });
 ```
 
-### GUI with Click Handlers
+### Main Menu GUI (Central Hub)
+```java
+// Open the main menu - access all features from one place!
+new MainMenuGui(plugin).open(player);
+
+// Players can access:
+// - Stats GUI (kills, deaths, K/D, playtime)
+// - Balance GUI (view balance, top balances)
+// - Shop GUI (purchase items)
+// - Warp GUI (teleport to saved locations)
+// - Leaderboard GUI (top kills, deaths, K/D)
+// - Toggle scoreboard
+```
+
+### Interactive GUI with Click Handlers
 ```java
 new IonGuiBuilder()
     .title("<gold><bold>Shop Menu")
@@ -244,9 +272,10 @@ new IonGuiBuilder()
 ## 📊 Performance
 
 - **Database**: 10-50x faster with automatic caching
-- **JAR Size**: 402KB (includes all dependencies)
+- **JAR Size**: 419KB (includes all dependencies + 6 GUI menus)
 - **Memory**: ~5MB runtime footprint
 - **Startup**: <100ms initialization
+- **Scoreboard**: No flashing, smooth updates every second
 
 ## 🔧 Customization
 
