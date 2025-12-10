@@ -1,14 +1,20 @@
 # 🚀 IonAPI Plugin Template
 
-A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://github.com/mattbaconz/IonAPI) features and best practices.
+A production-ready Minecraft plugin template showcasing [IonAPI v1.3.0](https://github.com/mattbaconz/IonAPI) features and best practices.
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://adoptium.net/)
 [![Paper](https://img.shields.io/badge/Paper-1.20.4-blue.svg)](https://papermc.io/)
-[![IonAPI](https://img.shields.io/badge/IonAPI-1.2.0-green.svg)](https://github.com/mattbaconz/IonAPI)
+[![IonAPI](https://img.shields.io/badge/IonAPI-1.3.0-green.svg)](https://github.com/mattbaconz/IonAPI)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Build](https://github.com/mattbaconz/ion-plugin-template/actions/workflows/build.yml/badge.svg)](https://github.com/mattbaconz/ion-plugin-template/actions/workflows/build.yml)
 
 ## ✨ Features Demonstrated
+
+### 🆕 New in v1.3.0
+- **Animated Scoreboards** - Smooth, flickering-free animated lines and gradients
+- **Confirmation GUI** - Built-in security for dangerous actions (deletions, purchases)
+- **Advanced Item Builder** - Skull textures, leather armor coloring, and potion effects
+- **Folia Support** - Fully compatible with Folia's region-based threading
 
 ### 💾 Database & Persistence
 - **ORM System** - Entity mapping with `@Table`, `@PrimaryKey`, `@Column` annotations
@@ -24,9 +30,9 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 
 ### 🎨 User Interface
 - **Main Menu GUI** - Central hub for accessing all features
-- **GUI Framework** - Inventory-based menus with click handlers
+- **GUI Framework** - Inventory-based menus with click handlers and theft prevention
 - **Interactive Commands** - All commands open beautiful GUIs
-- **Shop System** - Item purchasing with economy integration
+- **Shop System** - Item purchasing with economy integration and confirmation dialogs
 - **Live Scoreboard** - Auto-updating sidebar with placeholders (no flashing!)
 - **MiniMessage** - Modern text formatting with colors and styles
 
@@ -38,7 +44,7 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 
 ### 🔗 Additional Features
 - **Redis Pub/Sub** - Cross-server messaging (optional)
-- **Task Scheduler** - Unified async/sync task API
+- **Task Scheduler** - Unified async/sync task API (Folia-aware)
 - **Warp System** - Save and teleport to custom locations
 - **Leaderboards** - Top players by kills, deaths, and K/D ratio
 - **BossBar Manager** - Progress bars, health bars, and notifications
@@ -68,7 +74,7 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.2.0](https://
 ### Prerequisites
 - Java 21 or higher
 - Gradle 8.0+ (wrapper included)
-- IonAPI 1.2.0 (see build steps)
+- IonAPI 1.3.0 (see build steps)
 
 ### Build Steps
 
@@ -89,10 +95,10 @@ cd ion-plugin-template
 
 2. **Build the plugin**
 ```bash
-./gradlew shadowJar
+./gradlew clean shadowJar
 ```
 
-Output: `build/libs/IonTemplatePlugin-1.0.0.jar` (419KB)
+Output: `build/libs/IonTemplatePlugin-1.0.0.jar` (~500KB)
 
 #### Option 2: GitHub Actions
 

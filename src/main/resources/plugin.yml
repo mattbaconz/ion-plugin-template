@@ -47,6 +47,15 @@ commands:
     usage: /<command> [kills|deaths|kdr]
     aliases: [lb, top]
     permission: iontemplate.leaderboard
+  npc:
+    description: Spawn an NPC
+    usage: /<command> spawn <name> [skin]
+    permission: iontemplate.npc
+  eco:
+    description: Manage player economy
+    usage: /<command> <give|take|set> <player> <amount>
+    aliases: [economy, money]
+    permission: iontemplate.eco.admin
 
 permissions:
   iontemplate.*:
@@ -63,6 +72,8 @@ permissions:
       iontemplate.warp.set: true
       iontemplate.warp.delete: true
       iontemplate.leaderboard: true
+      iontemplate.npc: true
+      iontemplate.eco.admin: true
   iontemplate.warp:
     description: Use warps
     default: true
@@ -71,4 +82,7 @@ permissions:
     default: op
   iontemplate.warp.delete:
     description: Delete warps
+    default: op
+  iontemplate.eco.admin:
+    description: Admin economy commands
     default: op

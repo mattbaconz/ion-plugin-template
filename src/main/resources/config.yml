@@ -44,17 +44,67 @@ rate-limits:
     max-messages: 5
     window-seconds: 10
 
-# Shop items
+# Shop items (supports v1.3.0 features: skull textures, leather armor colors, potions)
 shop:
+  # Basic items
   diamond-sword:
     material: DIAMOND_SWORD
     price: 500
     name: "<gradient:red:blue>Legendary Sword"
+  
   golden-apple:
     material: GOLDEN_APPLE
     price: 100
     name: "<gold>Golden Apple"
+  
   ender-pearl:
     material: ENDER_PEARL
     price: 50
     name: "<dark_purple>Ender Pearl"
+  
+  # v1.3.0 Feature: Colored Leather Armor
+  blood-armor:
+    material: LEATHER_CHESTPLATE
+    price: 150
+    name: "<red>Blood Armor"
+    color: "#8B0000"  # Dark red
+  
+  ocean-boots:
+    material: LEATHER_BOOTS
+    price: 100
+    name: "<aqua>Ocean Walker Boots"
+    color: "#00CED1"  # Dark turquoise
+  
+  # v1.3.0 Feature: Custom Potions
+  speed-potion:
+    material: POTION
+    price: 75
+    name: "<aqua>Swift Elixir"
+    potion:
+      effect: SPEED
+      duration: 600  # 30 seconds (in ticks)
+      amplifier: 1   # Level 2
+      color: "#00FFFF"
+  
+  strength-splash:
+    material: SPLASH_POTION
+    price: 125
+    name: "<red>Warrior's Fury"
+    potion:
+      effect: STRENGTH
+      duration: 400
+      amplifier: 1
+      color: "#FF0000"
+  
+  # v1.3.0 Feature: Custom Player Heads
+  golden-crown:
+    material: PLAYER_HEAD
+    price: 250
+    name: "<gradient:gold:yellow>Golden Crown"
+    skull-texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjk2M2Q0MzA3ZGFmMzI0NDMxNjQyZjk3ZmQ0YzBlMzU1NzNiN2VlNGQyZjE2OGJkMGM4ZjFiNTQ0NjkyOGI1MCJ9fX0="
+  
+  diamond-crown:
+    material: PLAYER_HEAD
+    price: 500
+    name: "<gradient:aqua:blue>Diamond Crown"
+    skull-texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMThkYzg1ZWNmYzI5NzM5MmI0MTQ1NGViODE0OTkzNWI5YjRmM2U5MTRmMjJiMWM3YjY2ZmM1OTE2OGJhZGNiIn19fQ=="

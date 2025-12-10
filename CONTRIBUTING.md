@@ -144,7 +144,7 @@ What actually happens
 **Environment**
 - Java Version: 21
 - Paper Version: 1.20.4
-- IonAPI Version: 1.2.0
+- IonAPI Version: 1.3.0
 - Plugin Version: 1.0.0
 ```
 

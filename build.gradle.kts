@@ -15,35 +15,49 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    implementation("com.github.mattbaconz:IonAPI:1.3.0")
+    // Also add ion-paper explicitly for platform classes (JitPack multi-module workaround)
+    implementation("com.github.mattbaconz.IonAPI:ion-paper:1.3.0")
     
-    // IonAPI modules - only include what you need to reduce JAR size
-    // Using JitPack for CI/CD builds, mavenLocal() for local development
-    implementation("com.ionapi:ion-api:1.2.0")          // Core utilities (24KB)
-    implementation("com.ionapi:ion-core:1.2.0")         // Platform abstraction (8KB)
-    implementation("com.ionapi:ion-database:1.2.0")     // Database ORM (53KB)
-    implementation("com.ionapi:ion-economy:1.2.0")      // Economy system (19KB)
-    implementation("com.ionapi:ion-redis:1.2.0")        // Redis pub/sub (15KB)
-    implementation("com.ionapi:ion-gui:1.2.0")          // GUI framework (22KB)
-    implementation("com.ionapi:ion-item:1.2.0")         // Item builder (12KB)
-    implementation("com.ionapi:ion-ui:1.2.0")           // Scoreboard/BossBar (11KB)
-    implementation("com.ionapi:ion-tasks:1.2.0")        // Task scheduler (10KB)
-    
-    // To reduce size, comment out modules you don't use:
-    // - Remove ion-redis if not using Redis (-15KB + Jedis dependency)
-    // - Remove ion-database if not using database (-53KB + HikariCP)
-    // - Remove ion-economy if not using economy (-19KB)
-}
-
-tasks.shadowJar {
-    archiveClassifier.set("")
-    // Note: Enable relocation in production to avoid conflicts with other plugins
-    // relocate("com.ionapi", "${project.group}.libs.ionapi")
-}
-
-tasks.build {
-    dependsOn(tasks.shadowJar)
+    // HikariCP for database connection pooling
+    implementation("com.zaxxer:HikariCP:5.1.0") {
+        exclude(group = "org.slf4j")
+    }
 }
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
+tasks {
+    shadowJar {
+        archiveClassifier.set("")
+        
+        // Relocate IonAPI to avoid conflicts - disabled temporarily due to ASM issue
+        // relocate("com.ionapi", "com.example.iontemplate.libs.ionapi")
+        
+        // Remove unused classes - disabled to fix ASM issue
+        // minimize()
+        
+        // Remove test dependencies
+        exclude("net/bytebuddy/**")
+        exclude("org/mockito/**")
+        exclude("org/junit/**")
+        exclude("org/objenesis/**")
+        exclude("org/opentest4j/**")
+        exclude("org/apiguardian/**")
+        
+        // Remove META-INF bloat
+        exclude("META-INF/*.SF")
+        exclude("META-INF/*.DSA")
+        exclude("META-INF/*.RSA")
+        exclude("META-INF/maven/**")
+        exclude("META-INF/versions/**")
+        exclude("META-INF/native-image/**")
+        exclude("META-INF/proguard/**")
+    }
+    
+    build {
+        dependsOn(shadowJar)
+    }
 }
