@@ -24,6 +24,8 @@ public class ScoreboardManager {
         startUpdateTask();
     }
 
+    private static final int SCOREBOARD_WIDTH = 30; // Fixed width for stability
+
     public void showScoreboard(Player player) {
         UUID uuid = player.getUniqueId();
 
@@ -41,27 +43,27 @@ public class ScoreboardManager {
 
         IonScoreboard board = IonScoreboard.builder()
                 .title("<gradient:#FFD700:#FFA500><bold> ⚡ ION TEMPLATE ⚡ </bold></gradient>")
-                .line(0, "<gray>━━━━━━━━━━━━━━━━━━")
-                .line(1, "<gray>» <white><bold>Player")
-                .line(2, " <gray>│ <aqua>{player}")
-                .line(3, "")
-                .line(4, "<gray>» <gold><bold>Rank")
-                .line(5, " <gray>│ <yellow>★ Member")
-                .line(6, "")
-                .line(7, "<gray>» <light_purple><bold>Stats")
-                .line(8, " <gray>│ <white>Kills: <green>{kills}")
-                .line(9, " <gray>│ <white>Deaths: <red>{deaths}")
-                .line(10, " <gray>│ <white>K/D: <yellow>{kdr}")
-                .line(11, "")
-                .line(12, "<gray>» <green><bold>Balance")
-                .line(13, " <gray>│ <gold>{balance}")
-                .line(14, "")
-                // Animated line using v1.3.0 feature!
+                .line(0, pad("<gray>━━━━━━━━━━━━━━━━━━"))
+                .line(1, pad("<gray>» <white><bold>Player"))
+                .line(2, pad(" <gray>│ <aqua>{player}"))
+                .line(3, pad(""))
+                .line(4, pad("<gray>» <gold><bold>Rank"))
+                .line(5, pad(" <gray>│ <yellow>★ Member"))
+                .line(6, pad(""))
+                .line(7, pad("<gray>» <light_purple><bold>Stats"))
+                .line(8, pad(" <gray>│ <white>Kills: <green>{kills}"))
+                .line(9, pad(" <gray>│ <white>Deaths: <red>{deaths}"))
+                .line(10, pad(" <gray>│ <white>K/D: <yellow>{kdr}"))
+                .line(11, pad(""))
+                .line(12, pad("<gray>» <green><bold>Balance"))
+                .line(13, pad(" <gray>│ <gold>{balance}"))
+                .line(14, pad(""))
+                // Animated line using legacy colors for stability and padding
                 .animatedLine(15, 40L, // 40 ticks = 2 seconds per frame
-                        "<gradient:gold:yellow>✦ Welcome to the Server! ✦</gradient>",
-                        "<gradient:aqua:blue>✦ play.yourserver.com ✦</gradient>",
-                        "<gradient:green:lime>✦ Online: {online} Players ✦</gradient>",
-                        "<gradient:light_purple:pink>✦ Have Fun! ✦</gradient>")
+                        pad("<yellow>✦ Welcome to the Server! ✦"),
+                        pad("<aqua>✦ play.yourserver.com ✦"),
+                        pad("<green>✦ Online: {online} Players ✦"),
+                        pad("<light_purple>✦ Have Fun! ✦"))
                 .placeholder("player", Player::getName)
                 .placeholder("balance", p -> balanceCache.getOrDefault(p.getUniqueId(), "$0.00"))
                 .placeholder("kills", p -> String.valueOf(plugin.getPlayerKills(p.getUniqueId())))
@@ -78,6 +80,17 @@ public class ScoreboardManager {
                 plugin.getPlayerKills(uuid),
                 plugin.getPlayerDeaths(uuid),
                 balanceCache.getOrDefault(uuid, "$0.00")));
+    }
+
+    private String pad(String text) {
+        // Simple padding to prevent jitter
+        // Note: This is an estimation since we can't measure font width accurately
+        // here,
+        // but consistent trailing spaces usually helps sidebar stability.
+        if (text.length() >= SCOREBOARD_WIDTH) {
+            return text;
+        }
+        return text + " ".repeat(SCOREBOARD_WIDTH - text.length());
     }
 
     public void hideScoreboard(Player player) {
@@ -139,7 +152,7 @@ public class ScoreboardManager {
             for (UUID uuid : scoreboards.keySet()) {
                 updateBalanceCache(uuid);
             }
-        }, 5, 5, TimeUnit.SECONDS); // Update every 5 seconds
+        }, 5, 20, TimeUnit.SECONDS); // Update every 1 second (20 ticks) for smoother feel, relying on internal check
     }
 
     private void updateBalanceCache(UUID uuid) {
