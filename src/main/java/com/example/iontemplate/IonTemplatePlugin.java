@@ -6,6 +6,7 @@ import com.example.iontemplate.data.PlayerData;
 import com.example.iontemplate.economy.TemplateEconomyProvider;
 import com.example.iontemplate.gui.ShopGui;
 import com.example.iontemplate.listener.PlayerListener;
+import com.example.iontemplate.listener.GuiProtectionListener;
 import com.example.iontemplate.manager.ScoreboardManager;
 import com.ionapi.api.util.CooldownManager;
 import com.ionapi.api.util.Metrics;
@@ -73,6 +74,8 @@ public class IonTemplatePlugin extends IonPaperPlugin {
         // Register listeners
         getServer().getPluginManager().registerEvents(
                 new PlayerListener(this, chatLimiter), this);
+        getServer().getPluginManager().registerEvents(
+                new GuiProtectionListener(), this);
 
         getLogger().info("IonTemplate Plugin enabled!");
         getLogger().info("Database: " + getConfig().getString("database.type", "sqlite"));

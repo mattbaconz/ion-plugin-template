@@ -1,16 +1,16 @@
 # 🚀 IonAPI Plugin Template
 
-A production-ready Minecraft plugin template showcasing [IonAPI v1.3.0](https://github.com/mattbaconz/IonAPI) features and best practices.
+A production-ready Minecraft plugin template showcasing [IonAPI v1.5.0](https://github.com/mattbaconz/IonAPI) features and best practices.
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://adoptium.net/)
 [![Paper](https://img.shields.io/badge/Paper-1.20.4-blue.svg)](https://papermc.io/)
-[![IonAPI](https://img.shields.io/badge/IonAPI-1.3.0-green.svg)](https://github.com/mattbaconz/IonAPI)
+[![IonAPI](https://img.shields.io/badge/IonAPI-1.5.0-green.svg)](https://github.com/mattbaconz/IonAPI)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Build](https://github.com/mattbaconz/ion-plugin-template/actions/workflows/build.yml/badge.svg)](https://github.com/mattbaconz/ion-plugin-template/actions/workflows/build.yml)
 
 ## ✨ Features Demonstrated
 
-### 🆕 New in v1.3.0
+### Key Features
 - **Animated Scoreboards** - Smooth, flickering-free animated lines and gradients
 - **Confirmation GUI** - Built-in security for dangerous actions (deletions, purchases)
 - **Advanced Item Builder** - Skull textures, leather armor coloring, and potion effects
@@ -74,7 +74,7 @@ A production-ready Minecraft plugin template showcasing [IonAPI v1.3.0](https://
 ### Prerequisites
 - Java 21 or higher
 - Gradle 8.0+ (wrapper included)
-- IonAPI 1.3.0 (see build steps)
+- IonAPI 1.5.0 (see build steps)
 
 ### Build Steps
 

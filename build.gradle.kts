@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.example"
-version = "1.0.0"
+version = "1.1.0"
 
 repositories {
     mavenLocal()
@@ -15,9 +15,9 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-    implementation("com.github.mattbaconz:IonAPI:1.3.0")
+    implementation("com.github.mattbaconz:IonAPI:1.5.0")
     // Also add ion-paper explicitly for platform classes (JitPack multi-module workaround)
-    implementation("com.github.mattbaconz.IonAPI:ion-paper:1.3.0")
+    implementation("com.github.mattbaconz.IonAPI:ion-paper:1.5.0")
     
     // HikariCP for database connection pooling
     implementation("com.zaxxer:HikariCP:5.1.0") {
@@ -33,10 +33,11 @@ tasks {
     shadowJar {
         archiveClassifier.set("")
         
-        // Relocate IonAPI to avoid conflicts - disabled temporarily due to ASM issue
+        // Note: Relocation is disabled due to ASM compatibility issues with Java 21 bytecode.
+        // If you need relocation, use the shade-relocate plugin or wait for ShadowJar update.
         // relocate("com.ionapi", "com.example.iontemplate.libs.ionapi")
         
-        // Remove unused classes - disabled to fix ASM issue
+        // Note: minimize() is disabled as it can cause issues with reflection-heavy libraries.
         // minimize()
         
         // Remove test dependencies

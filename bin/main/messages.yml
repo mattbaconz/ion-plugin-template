@@ -1,0 +1,101 @@
+# IonTemplate Plugin Messages
+# Supports MiniMessage formatting: https://docs.advntr.dev/minimessage/format.html
+
+# General Messages
+prefix: "<gradient:gold:yellow>[IonTemplate]</gradient>"
+no-permission: "<red>You don't have permission to use this command!"
+player-only: "<red>This command can only be used by players!"
+player-not-found: "<red>Player not found!"
+invalid-amount: "<red>Invalid amount! Please enter a valid number."
+
+# Economy Messages
+economy:
+  balance-self: "<gold>Your balance: <yellow>${balance}"
+  balance-other: "<gold>{player}'s balance: <yellow>${balance}"
+  insufficient-funds: "<red>Insufficient funds! You need <gold>${amount}"
+  transaction-failed: "<red>Transaction failed! Please try again."
+  
+  # Pay Command
+  pay:
+    success-sender: "<green>✓ Sent <gold>${amount} <green>to {player}!"
+    success-receiver: "<green>✓ Received <gold>${amount} <green>from {player}!"
+    cannot-pay-self: "<red>You can't pay yourself!"
+    cooldown: "<red>Wait {time}s before paying again!"
+    
+# Teleport Messages
+teleport:
+  spawn:
+    success: "<green>✓ Teleported to spawn!"
+    cooldown: "<red>Wait {time}s before teleporting again!"
+    
+  warp:
+    success: "<green>✓ Teleported to {warp}!"
+    not-found: "<red>Warp '{warp}' not found!"
+    list: "<gold>Available warps: <yellow>{warps}"
+    created: "<green>✓ Warp '{warp}' created!"
+    deleted: "<green>✓ Warp '{warp}' deleted!"
+
+# Shop Messages
+shop:
+  title: "<gold><bold>✨ Shop Menu"
+  purchase-success: "<green>✓ Purchased! New balance: <gold>${balance}"
+  purchase-failed: "<red>Purchase failed! Not enough money."
+  insufficient-funds: "<red>Not enough money! Need <gold>${price}"
+  
+# Stats Messages
+stats:
+  title: "<gold><bold>═══ Your Stats ═══"
+  kills: "<yellow>Kills: <white>{kills}"
+  deaths: "<yellow>Deaths: <white>{deaths}"
+  kdr: "<yellow>K/D Ratio: <white>{kdr}"
+  playtime: "<yellow>Play Time: <white>{time}"
+  footer: "<gold><bold>══════════════════"
+  no-data: "<red>No stats found!"
+  
+# Leaderboard Messages
+leaderboard:
+  title: "<gold><bold>═══ Top Players ═══"
+  entry: "<yellow>#{rank}. <white>{player} <gray>- <green>{value}"
+  footer: "<gold><bold>═══════════════════"
+  empty: "<gray>No data available yet!"
+  
+# Kit Messages
+kit:
+  received: "<green>✓ Received kit: <yellow>{kit}"
+  cooldown: "<red>You can claim this kit again in {time}!"
+  not-found: "<red>Kit '{kit}' not found!"
+  list: "<gold>Available kits: <yellow>{kits}"
+  
+# Scoreboard Messages
+scoreboard:
+  toggled-on: "<green>Scoreboard enabled!"
+  toggled-off: "<red>Scoreboard disabled!"
+  
+# Chat Messages
+chat:
+  rate-limit: "<red>Slow down! You're sending messages too fast."
+  muted: "<red>You are muted!"
+  
+# Admin Messages
+admin:
+  reload-success: "<green>✓ Configuration reloaded!"
+  reload-failed: "<red>Failed to reload configuration!"
+  database-saved: "<green>✓ Database saved successfully!"
+  
+# Error Messages
+error:
+  generic: "<red>An error occurred! Please contact an administrator."
+  database: "<red>Database error! Please try again later."
+  command-failed: "<red>Command execution failed!"
+  
+# Welcome Messages
+welcome:
+  first-join: "<gradient:gold:yellow>Welcome to the server, {player}!</gradient>"
+  returning: "<green>Welcome back, {player}!"
+  
+# Placeholder Examples
+# Use {player} for player name
+# Use {balance} for economy balance
+# Use {time} for time values
+# Use {amount} for numeric amounts
+# Use {rank} for leaderboard positions

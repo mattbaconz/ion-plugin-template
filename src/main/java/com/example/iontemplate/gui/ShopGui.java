@@ -102,7 +102,7 @@ public class ShopGui {
     }
 
     private void handlePurchase(Player player, ShopItem item) {
-        // For expensive items, show confirmation dialog (v1.3.0 feature!)
+        // For expensive items, show confirmation dialog
         if (item.price() >= CONFIRMATION_THRESHOLD) {
             showConfirmationDialog(player, item);
         } else {
@@ -179,7 +179,7 @@ public class ShopGui {
         var builder = IonItem.builder(item.material())
                 .name(item.name());
 
-        // Apply special properties (v1.3.0 features)
+        // Apply special properties
         if (item.material() == Material.PLAYER_HEAD && item.skullTexture() != null) {
             builder.skullTexture(item.skullTexture());
         } else if (isLeatherArmor(item.material()) && item.color() != null) {
@@ -212,12 +212,12 @@ public class ShopGui {
     private List<ShopItem> loadShopItems() {
         List<ShopItem> items = new ArrayList<>();
         if (shopConfig == null) {
-            // Default items if no config (showcasing v1.3.0 features)
+            // Default items if no config
             items.add(new ShopItem(Material.DIAMOND_SWORD, 500, "<gradient:red:blue>Legendary Sword", null, null, null,
                     null, 0, 0));
             items.add(new ShopItem(Material.GOLDEN_APPLE, 100, "<gold>Golden Apple", null, null, null, null, 0, 0));
             items.add(new ShopItem(Material.ENDER_PEARL, 50, "<dark_purple>Ender Pearl", null, null, null, null, 0, 0));
-            // v1.3.0 feature items
+            // Feature items
             items.add(new ShopItem(Material.LEATHER_CHESTPLATE, 150, "<red>Blood Armor", null, Color.fromRGB(139, 0, 0),
                     null, null, 0, 0));
             items.add(new ShopItem(Material.POTION, 75, "<aqua>Speed Potion", null, null, Color.AQUA,
@@ -257,7 +257,9 @@ public class ShopGui {
                 if (potionSection != null) {
                     String effectName = potionSection.getString("effect", "");
                     if (!effectName.isEmpty()) {
-                        potionEffect = PotionEffectType.getByName(effectName);
+                        // Use modern Registry API instead of deprecated getByName
+                        potionEffect = org.bukkit.Registry.EFFECT.get(
+                                org.bukkit.NamespacedKey.minecraft(effectName.toLowerCase()));
                     }
                     potionDuration = potionSection.getInt("duration", 600);
                     potionAmplifier = potionSection.getInt("amplifier", 0);

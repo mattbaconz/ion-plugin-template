@@ -34,7 +34,7 @@ public class WarpGui {
         IonGuiBuilder builder = new IonGuiBuilder()
                 .title("<gradient:#FF55FF:#AA00AA><bold>✦ WARPS ✦</bold></gradient>")
                 .rows(4)
-                .allowTake(false) // Prevent item stealing (v1.3.0)
+                .allowTake(false) // Prevent item stealing
                 .allowPlace(false)
                 .allowDrag(false)
                 .fillBorderBuilder(new IonItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name(" ").build());
@@ -65,7 +65,7 @@ public class WarpGui {
 
             builder.item(slot, warpItem, click -> {
                 if (click.isRightClick() && player.hasPermission("iontemplate.warp.delete")) {
-                    // Show confirmation dialog for deletion (v1.3.0 feature!)
+                    // Show confirmation dialog for deletion
                     showDeleteConfirmation(player, warp);
                 } else {
                     // Teleport
@@ -136,7 +136,7 @@ public class WarpGui {
     }
 
     private void showDeleteConfirmation(Player player, Warp warp) {
-        // v1.3.0 ConfirmationGui for dangerous action!
+        // ConfirmationGui for dangerous action!
         ConfirmationGui.create()
                 .title("<red><bold>⚠ Delete Warp?</bold></red>")
                 .message("<gray>Delete warp <light_purple>" + warp.getName() + "<gray>? This cannot be undone!")
