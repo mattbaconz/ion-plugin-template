@@ -98,7 +98,7 @@ cd ion-plugin-template
 ./gradlew clean shadowJar
 ```
 
-Output: `build/libs/IonTemplatePlugin-1.0.0.jar` (~500KB)
+Output: `build/libs/IonTemplatePlugin-1.1.0.jar` (~500KB)
 
 #### Option 2: GitHub Actions
 
